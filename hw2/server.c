@@ -14,7 +14,7 @@ int main(int argc, char *argv[]){
     int listenfd, connfd;
     struct sockaddr_in server_addr, client_addr;
     int client_addr_len = sizeof(client_addr);
-    char *message = "Hello World!\n";
+    char *message = "Hello World!";
 
     // Get socket file descriptor
     if((listenfd = socket(AF_INET , SOCK_STREAM , 0)) < 0){
