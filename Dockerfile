@@ -8,6 +8,7 @@ RUN apt install -y openssh-server sudo vim grep gawk rsync tmux man manpages man
 RUN apt install -y gcc g++ gdb make yasm nasm tcpdump libcapstone-dev python3
 RUN apt install -y libc6-dbg dpkg-dev
 RUN apt install -y curl git zsh
+RUN apt install -y apache2-utils
 RUN apt install -y ffmpeg
 
 # /var/run/sshd: required on ubuntu
