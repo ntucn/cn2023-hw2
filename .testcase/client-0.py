@@ -1,17 +1,7 @@
 from pwn import * 
-import filecmp
-import os
+from assets.utils import *
 
 TIMEOUT = 2
-
-def genFile(filename, size='1M'):
-    os.system(f'dd if=/dev/urandom of={filename} bs={size} count=1')
-
-def cmpFile(fileA, fileB):
-    assert(filecmp.cmp(fileA, fileB))
-
-def delFile(filename):
-    os.remove(filename)
 
 def sendCMD(p, cmd, expect, timeout=TIMEOUT):
     recv = p.sendlineafter('> '.encode(), cmd.encode(), timeout)
@@ -23,6 +13,8 @@ def sendCMD(p, cmd, expect, timeout=TIMEOUT):
     assert(recv.decode() == expect)
 
 if __name__ == '__main__':
+    delPath('../hw2/files')
+
     pty = process.PTY
     c = process('./client 127.0.0.1 2023 demo:123', shell=True, cwd='../hw2', stdin=pty, stdout=pty) 
     # argv=['./hw2/client', '127.0.0.1', '8080', 'username:password']
@@ -54,3 +46,4 @@ if __name__ == '__main__':
         print('Client close.')
 
     delFile('../hw2/client.bin')
+    delPath('../hw2/files')

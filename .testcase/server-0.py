@@ -14,7 +14,7 @@ if __name__ == '__main__':
     req = requests.get(f'http://localhost:{PORT}/')
     assert(req.status_code == 200)
 
-    with open('.testcase/assets/index.html') as f:
+    with open('assets/index.html') as f:
         s = f.read()
 
     p_number = re.compile(r'{}'.format(s))
