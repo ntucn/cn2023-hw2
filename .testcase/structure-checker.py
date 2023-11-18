@@ -43,6 +43,7 @@ if __name__ == '__main__':
     retval += checkDir('hw2/web/tmp', expect=False)
     retval += checkDir('hw2/web/videos', expect=False)
 
+    retval += checkFileR('.vscode', expect=False)
     retval += checkFileR('__pycache__', expect=False)
     retval += checkFileR('node_modules', expect=False)
     retval += checkFileR('__MACOSX', expect=False)
