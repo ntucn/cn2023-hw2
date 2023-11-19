@@ -34,6 +34,8 @@ if __name__ == '__main__':
     retval = 0
 
     retval += checkFile('hw2/makefile', expect=True, aliases=['hw2/Makefile'])
+    retval += checkFile('hw2/server.c', expect=True, aliases=['hw2/server.cpp'])
+    retval += checkFile('hw2/client.c', expect=True, aliases=['hw2/client.cpp'])
     
     retval += checkFile('hw2/client', expect=False)
     retval += checkFile('hw2/server', expect=False)

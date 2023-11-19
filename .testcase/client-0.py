@@ -3,14 +3,19 @@ from assets.utils import *
 
 TIMEOUT = 2
 
-def sendCMD(p, cmd, expect, timeout=TIMEOUT):
+def sendCMD(p, cmd, expect, timeout=TIMEOUT, expect_aliases=[]):
     recv = p.sendlineafter('> '.encode(), cmd.encode(), timeout)
     print(f'send = {cmd}', end='')
     assert(recv.decode() == '> ')
 
     recv = p.recvline()
     print(f' recv = {recv}')
-    assert(recv.decode() == expect)
+    
+    if recv.decode() != expect:
+        for alias in expect_aliases:
+            if recv.decode() == alias:
+                return
+        assert(0)
 
 if __name__ == '__main__':
     delPath('../hw2/files')
@@ -34,8 +39,8 @@ if __name__ == '__main__':
     cmpFile('../hw2/files/server.bin', 'assets/pseudo-server/files/server.bin')
     sendCMD(c, 'get notexist', 'Command failed.\n', timeout=TIMEOUT)
 
-    sendCMD(c, 'fake command', 'Command not found.\n', timeout=TIMEOUT)
-    sendCMD(c, 'fakecommand', 'Command not found.\n', timeout=TIMEOUT)
+    sendCMD(c, 'fake command', 'Command not found.\n', timeout=TIMEOUT, expect_aliases=['Command Not Found.\n'])
+    sendCMD(c, 'fakecommand', 'Command not found.\n', timeout=TIMEOUT, expect_aliases=['Command Not Found.\n'])
 
     sendCMD(c, 'quit', 'Bye.\n', timeout=TIMEOUT)
 

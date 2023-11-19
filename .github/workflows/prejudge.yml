@@ -18,7 +18,8 @@ jobs:
       - uses: actions/checkout@v4
       - run: gcc -v
       - run: cp .testcase/assets/secret hw2
-      - run: cd hw2 && make && ./server 8080 &
+      - run: cd hw2 && make
+      - run: cd hw2 && ./server 8080 &
       - run: cd .testcase && python server-0.py 8080
       - run: cd hw2 && ./server 7777 &
       - run: cd .testcase && python server-1.py 7777
